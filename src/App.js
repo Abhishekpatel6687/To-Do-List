@@ -1,10 +1,11 @@
-
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Form from './Form';
 
 function App() {
   return (
-    <div className="App">
-      
+    <div>
+      <Form/>
     </div>
   );
 }
