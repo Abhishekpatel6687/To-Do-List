@@ -1,53 +1,50 @@
-
-
 import React, { useState } from "react";
 
 const Form = () => {
   const [input, setInput] = useState({ name: "", num: "" });
   const [data, setData] = useState([]);
-  // const [editData, setEditData] = useState(0);
+  const [editData, setEditData] = useState(null);
 
-  const update = (e) => { 
-    if("name" === e.target.name || "num" ===e.target.num){
-      setInput({...input, name:e.target.value})
-
-    }else{
-    setInput({...input, num:e.target.value})
-    }
- 
+  const update = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
-  const submit = (e) =>{  
-    e.preventDefault()  
-    if( "name" === "" && "num" === ""){
-      alert("hjhj")
-    }else{
-      setData([...data, input])
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    if (input.name === "" || input.num === "") {
+      alert("Please fill in all fields");
+    } else {
+      if (editData !== null) {
+        const newData = data.map((item, ind) =>
+          editData === ind ? { name: input.name, num: input.num } : item
+        );
+        setData(newData);
+        setEditData(null);
+      } else {
+        setData([...data, input]);
+      }
+
+      setInput({ name: "", num: "" });
     }
-    // setInput({name:"",num:""})
   };
 
   const remove = (index) => {
-    const NewData = data.filter( (item,ind) => ind !== index );
-    setData([...NewData])
-  }
+    const newData = data.filter((item, ind) => ind !== index);
+    setData(newData);
+  };
 
-  // const edit =(index) =>{
-  //   const newEdit = data.find((item,i) => {
-  //       if(i===index){
-  //       setInput({name:item.data.name, num:item.data.num})
-  //     }
-  //     return setEditData(newEdit)
-  //   })
-  // }
+  const edit = (index) => {
+    setEditData(index);
+    setInput(data[index]);
+  };
+
   return (
-    <div
-      style={{ height: "100%" }}
-      className="container-fluid gx-0 bg-black text-center"
-    >
-      <div className="container border border-danger gx-0 ">
+    <div style={{ height: "100%" }} className="container-fluid gx-0 bg-black text-center">
+      <div className="container border border-danger gx-0">
         <div className="row bg-success m-5 gx-0">
           <h1 className="text-danger text-start mt-5">Todo List</h1>
-          <form className=" text-white ">
+          <form onSubmit={submit} className="text-white">
             <div>
               <label className="col-3">First Name</label>
               <input
@@ -70,26 +67,19 @@ const Form = () => {
                 className="col-3"
               />
             </div>
-            <button
-              onClick={submit}
-              className="col-3 btn btn-success bg-danger"
-            >
-              Add
+            <button className="col-3 btn btn-success bg-danger">
+              {editData !== null ? "Edit" : "Submit"}
             </button>
           </form>
-          {
-            data.map((item, index)=>{
-              return(
-                <div key={index}>
-                  <p className="text-white">Name    {item.name} Mobile   {item.num}
-                  <button onClick={()=>remove(index)}>Remove</button>
-                  {/* <button onClick={()=>edit(index)}>Edit</button> */}
-                  </p>
-                </div>
-              )
-
-            })
-          }
+          {data.map((item, index) => (
+            <div key={index}>
+              <p className="text-white">
+                Name: {item.name} Mobile: {item.num}
+                <button onClick={() => remove(index)}>Remove</button>
+                <button onClick={() => edit(index)}>Edit</button>
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
