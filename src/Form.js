@@ -40,49 +40,50 @@ const Form = () => {
   };
 
   return (
-    <div style={{ height: "100%" }} className="container-fluid gx-0 bg-black text-center">
-      <div className="container border border-danger gx-0">
-        <div className="row bg-success m-5 gx-0">
-          <h1 className="text-danger text-start mt-5">Todo List</h1>
+    <div className="container-sm bg-dark text-center">
+
+
+          <h1 className="text-info ">Todo List</h1>
           <form onSubmit={submit} className="text-white">
-            <div>
-              <label className="col-3">First Name</label>
+        
+              <label className="fs-4">First Name</label>
+              
               <input
+              className="form-control mt-2 mb-3 text-center fs-5"
                 type="text"
                 name="name"
                 value={input.name}
                 onChange={update}
                 placeholder="Enter your name"
-                className="col-3"
               />
-            </div>
-            <div>
-              <label className="col-3">Mobile</label>
+           
+              <label className="fs-4">Mobile</label>
               <input
+                className="form-control mt-2 mb-3 text-center fs-5"
                 type="number"
                 name="num"
                 value={input.num}
                 onChange={update}
                 placeholder="Enter your name"
-                className="col-3"
               />
-            </div>
-            <button className="col-3 btn btn-success bg-danger">
+           
+            <button className="btn btn-primary fs-5">
               {editData !== null ? "Edit" : "Submit"}
             </button>
           </form>
           {data.map((item, index) => (
-            <div key={index}>
-              <p className="text-white">
-                Name: {item.name} Mobile: {item.num}
-                <button onClick={() => remove(index)}>Remove</button>
-                <button onClick={() => edit(index)}>Edit</button>
-              </p>
+            <div key={index} className="container bg-info mt-2">
+              <p className="todo">
+                <p className="col-6 text-start">Name: {item.name} </p>
+                <p className="text-center">Mobile: {item.num} </p>
+                </p>
+                <button onClick={() => remove(index)} className="btn btn-danger mx-2">Delete</button>
+                <button onClick={() => edit(index)} className="btn btn-primary">Edit</button>
+            
             </div>
           ))}
         </div>
-      </div>
-    </div>
+  
   );
 };
 
