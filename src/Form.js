@@ -84,7 +84,7 @@ const Form = () => {
                 name="num"
                 value={input.num}
                 onChange={update}
-                placeholder="Enter your mobile number"
+                placeholder="Enter mobile number"
               />
            
             <button className="btn btn-primary fs-5">
