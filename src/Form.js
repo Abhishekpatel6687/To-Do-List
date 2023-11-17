@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Form = () => {
   const [input, setInput] = useState({ name: "", num: "" });
   const [data, setData] = useState([]);
   const [editData, setEditData] = useState(null);
 
-  const update = (e) => {
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(data))
+  },[data])
+
+  useEffect(()=>{
+    const data = JSON.parse(localStorage.getItem("data"))
+    if(data){
+      setData(data)
+    }
+  },[])
+
+ const update = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -40,7 +51,8 @@ const Form = () => {
   };
 
   return (
-    <div className="container-sm bg-dark text-center">
+    <div className="container-
+     bg-dark text-center">
 
 
           <h1 className="text-info ">Todo List</h1>
