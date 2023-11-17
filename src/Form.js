@@ -47,6 +47,10 @@ const Form = () => {
     setEditData(index);
     setInput(data[index]);
   };
+
+  function AllDelete(){
+    setData([])
+  }
      // add data to localStorage
   useEffect(() => {
     localStorage.setItem("lists", JSON.stringify(data))
@@ -80,7 +84,7 @@ const Form = () => {
                 name="num"
                 value={input.num}
                 onChange={update}
-                placeholder="Enter your name"
+                placeholder="Enter your mobile number"
               />
            
             <button className="btn btn-primary fs-5">
@@ -88,7 +92,7 @@ const Form = () => {
             </button>
           </form>
           {data.map((item, index) => (
-            <div key={index} className="container bg-info mt-2">
+            <div key={index} className="container bg-info mt-3">
               <p className="todo">
                 <p className="col-6 text-start">Name: {item.name} </p>
                 <p className="text-center">Mobile: {item.num} </p>
@@ -98,6 +102,11 @@ const Form = () => {
             
             </div>
           ))}
+          {
+            data.length>=1 && 
+            <button onClick={AllDelete} className="btn btn-danger mt-4 fs-5">All Delete</button>  
+          }
+       
         </div>
   
   );
