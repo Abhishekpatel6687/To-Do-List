@@ -97,8 +97,8 @@ const Form = () => {
                 <p className="col-6 text-start">Name: {item.name} </p>
                 <p className="text-center">Mobile: {item.num} </p>
                 </p>
-                <button onClick={() => remove(index)} className="btn btn-danger mx-2">Delete</button>
-                <button onClick={() => edit(index)} className="btn btn-primary">Edit</button>
+                <button onClick={() => remove(index)} className="btn btn-danger rounded-4 mx-2">Delete</button>
+                <button onClick={() => edit(index)} className="btn btn-primary rounded-4">Edit</button>
             
             </div>
           ))}
